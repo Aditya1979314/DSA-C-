@@ -8,51 +8,33 @@ class node{
     node* left;
     node* right;
 
-    node(int val){
-        data = val;
-        left = NULL;
-        right = NULL;
-    }
+node(int val){
+    data = val;
+    left = NULL;
+    right = NULL;
+}
+
 };
 
-node* createTree(node* root){ 
-    int data;
-    cout<<"Enter data"<<endl;
-    cin>>data;
-
-    root = new node(data);
-    if(data == -1){
-        return root;
-    }
-
-
-    root->left = createTree(root->left);
-    root->right = createTree(root->right);
-
-    return root;
-}
-
-int heightTree(node* root){
-
-if(root->data == -1 ){
+int height(node* root){
+    if(root == NULL)
     return 0;
+
+    int leftheight = height(root->left);
+    int rightheight = height(root->right);
+
+    return max(leftheight,rightheight)+1;
 }
 
-int heightLeft = heightTree(root->left);
-int heightRight = heightTree(root->right);
-
-if(heightLeft>heightRight)
-return heightLeft+1;
-else
-return heightRight+1;
-
-}
 
 int main(){
 
-    node* root = NULL;
-    root = createTree(root);
+    node* root = new node(1);
+    root->left = new node(2);
+    root->right = new node(3);
+    root->left->left = new node(4);
+    root->left->right = new node(5);
 
-    cout<<heightTree(root)<<" ";
+    cout<<height(root)<<" ";
     return 0;
 }
