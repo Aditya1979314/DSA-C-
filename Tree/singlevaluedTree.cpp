@@ -1,48 +1,61 @@
 #include<iostream>
 using namespace std;
      
-class node{
+class Node{
 public:
 int data;
-node* left;
-node* right;
+Node* left;
+Node* right;
 
-node(int val){
+Node(int val){
     data = val;
     left = NULL;
     right = NULL;
 }
 };
 
-bool samevalTree(node* root,int rootdata){
-    if(root == NULL)
-    return true;
+bool traversalcheck(Node* root,int n){
 
-     if(root->data == rootdata)
-     return (samevalTree(root->left,rootdata) && samevalTree(root->right,rootdata));
+if(root == NULL)
+return 1;
 
-     return false;
+if(root->data == n && traversalcheck(root->left,n) && traversalcheck(root->right,n)){
+    return 1;
 }
 
+return 0;
 
-int countTrees(node *root){
+}
+
+bool check(Node* root){
+    int n = root->data;
+
+    return traversalcheck(root,n);
+}
+
+int singlevalued(Node* root){
     if(root == NULL)
     return 0;
 
-    
+if(check(root) == true)
+return singlevalued(root->left)+singlevalued(root->right)+1;
+else
+return singlevalued(root->left)+singlevalued(root->right);
+
 }
+
+
 
 int main(){
 
-node* root = new node(1);
-root->left = new node(1);
-root->right = new node(1);
-root->left->left = new node(1);
-root->left->right = new node(1);
-root->right->left = new node(1);
-root->right->right = new node(0);
+Node* root = new Node(5);
+root->left = new Node(4);
+root->right = new Node(5);
+root->left->left = new Node(4);
+root->left->right = new Node(4);
+root->right->right = new Node(5);
 
-cout<<samevalTree(root,root->data);
+cout<<singlevalued(root)<<" ";
 
     return 0;
 }
