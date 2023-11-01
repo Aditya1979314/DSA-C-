@@ -18,30 +18,23 @@ int conv(string s){
 
 }
 
-string contos(int n){
-string ans = "";
-stack<char> st;
-
-int check = n;
-while(check/10 != 0){
-    int temp = n%10;
-    st.push(temp - '0');
-    check = check/10;
-}
-
-while(!st.empty()){
-    ans = ans + st.top();
-    st.pop();
-}
-}
 
  string multiplyStrings(string s1, string s2) {
+    int a = conv(s1);
+    int b= conv(s2);
 
+    string ans = to_string(a*b);
+    return ans;
     }
 
 
 int main(){
-    string n = "0012";
-    cout<<conv(n)<<" ";
+  string n = "11";
+  string y = "12";
+
+  cout<<multiplyStrings(n,y)<<endl;
+
+
+
     return 0;
 }
